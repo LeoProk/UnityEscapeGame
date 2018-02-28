@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-	public Vector2 velocity = new Vector2(-4, 0);  
-	int score;
+	private Vector2 velocity = new Vector2(-4, 0); 
+	private GameObject original;
+	private int score;
 	// Use this for initialization
 	void Start()
 	{
@@ -13,15 +14,11 @@ public class Obstacle : MonoBehaviour
 		transform.position = new Vector3(transform.position.x, transform.position.y -  Random.value, transform.position.z);
 	}
 
-	void Destroy()
-	{
-		Destroy (gameObject);
-	}
-
-	void OnBecameInvisible() {
-
-		Destroy();
-		score++;
+	void Update() {
+		if (GameObject.Find("firePairs" + "(Clone)").transform.position.x < -13) {
+			score++;
+			Destroy (GameObject.Find("firePairs" + "(Clone)"));
+		}
 
 	}
 	// Update is called once per frame
